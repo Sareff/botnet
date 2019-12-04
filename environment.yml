@@ -1,0 +1,5 @@
+name: botnet
+dependencies:
+  - beautifulsoup4
+  - openpyxl
+  - requests
