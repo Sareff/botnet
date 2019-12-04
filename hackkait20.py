@@ -35,7 +35,7 @@ sesskey = obj["sesskey"]
 URL  = "http://dist.kait20.ru/lib/ajax/service.php"
 
 params = {'sesskey': sesskey,
-        'info': 'core_course_get_enrolled_courses_by_timeline_classification'}
+          'info': 'core_course_get_enrolled_courses_by_timeline_classification'}
 
 data = [{
             "index":0,
@@ -56,6 +56,21 @@ URL = ans[0]["data"]["courses"][0]["viewurl"]
 
 r = s.get(url = URL)
 
-print(r.text)
 
+soup = BeautifulSoup(r.text, "html.parser")
+ids = soup.find_all("input", {"name":"id"})
+idValues = []
+for inputt in ids:
+    idValues.append(inputt.get('value'))
 
+print(idValues)
+
+for idValue in idValues:
+    data = {
+            "id": idValue,
+            "completionstate": 1,
+            "fromajax": 1,
+            "sesskey": sesskey
+            }
+    URL = "http://dist.kait20.ru/course/togglecompletion.php"
+    r = s.post(url = URL, data = data)
