@@ -4,6 +4,7 @@ from requests import *
 import json
 import re
 
+#All magic
 def learn(login, password):
     s = Session()
 
@@ -77,7 +78,7 @@ def learn(login, password):
                 }
         URL = "http://dist.kait20.ru/course/togglecompletion.php"
         r = s.post(url = URL, data = data)
-
+#Do stuff
 wb = load_workbook('./1.xlsx')
 sheet = wb['Table 1']
 users = {}
@@ -87,6 +88,3 @@ for i in range(2, 36):
 for login, password in users.items():
     print(login, password)
     learn(login, password)
-    
-    
-
