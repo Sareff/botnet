@@ -1,9 +1,12 @@
 from bs4 import BeautifulSoup
 from requests import *
+import json
+import re
 
 s = Session()
 
 URL = "http://dist.kait20.ru/login/index.php"
+p = {"index":0,"methodname":"core_fetch_notifications","args":{"contextid":1}}
 
 r = s.get(url = URL)
 
@@ -12,18 +15,23 @@ soup = BeautifulSoup(data, 'html.parser')
 inputs = soup.find("input", {"name":"logintoken"})
 token = inputs.get('value')
 
-print(token)
-
 data = {'anchor': '',
         'logintoken': token,
-        'username': 'yuandrejtseva',
-        'password': 'YWeTxTQS0P'}
+        'username': 'mpavlova',
+        'password': 'u1xr0Bh8E0'}
 
 r = s.post(url = URL, data = data)
-answer = BeautifulSoup(r.text, 'html.parser')
-print(answer)
-course = answer.find_all("div", {"id": "page-content-container-2"})
-#gid = course.get("data-course-id")
-#print(gid)
-print(course)
+
+ans = BeautifulSoup(r.text, 'html.parser')
+print(ans)
+pattern = re.compile(r"M.cfg = (\{.*?});", re.MULTILINE | re.DOTALL)
+script = ans.find("script", text=pattern)
+obj = {}
+
+if script:
+    obj = pattern.search(script.text).group(1)
+    obj = json.loads(obj)
+
+print(obj["sesskey"])
+
 
