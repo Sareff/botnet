@@ -58,8 +58,13 @@ def learn(login, password):
 
     r = s.post(url = URL, params = params, json = data)
 
-    ans = r.json()
-    URL = ans[0]["data"]["courses"][0]["viewurl"]
+    try:
+        ans = r.json()
+        URL = ans[0]["data"]["courses"][0]["viewurl"]
+    except:
+        print("************ Wrong")
+        return
+
 
     r = s.get(url = URL)
 
@@ -79,7 +84,7 @@ def learn(login, password):
         URL = "http://dist.kait20.ru/course/togglecompletion.php"
         r = s.post(url = URL, data = data)
 #Do stuff
-wb = load_workbook('./1.xlsx')
+wb = load_workbook('./2.xlsx')
 sheet = wb['Table 1']
 users = {}
 for i in range(2, 36):
