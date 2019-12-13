@@ -79,7 +79,7 @@ def learn(login, password):
         URL = "http://dist.kait20.ru/course/togglecompletion.php"
         r = s.post(url = URL, data = data)
 #Do stuff
-wb = load_workbook('./1.xlsx')
+wb = load_workbook('/home/ec2-user/botnet/1.xlsx')
 sheet = wb['Table 1']
 users = {}
 for i in range(2, 36):
