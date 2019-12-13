@@ -58,8 +58,13 @@ def learn(login, password):
 
     r = s.post(url = URL, params = params, json = data)
 
-    ans = r.json()
-    URL = ans[0]["data"]["courses"][0]["viewurl"]
+    try:
+        ans = r.json()
+        URL = ans[0]["data"]["courses"][0]["viewurl"]
+    except:
+        print("************ Wrong")
+        return
+
 
     r = s.get(url = URL)
 
