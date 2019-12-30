@@ -8,4 +8,4 @@ or:
     
     ./install.sh
 
-
+If you are not, install all packages from `environment.yml`.
