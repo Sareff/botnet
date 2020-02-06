@@ -89,7 +89,7 @@ def learn(login, password):
 
 
 bots = Users()
-i = input("Paste database you want to initalize (in the same partition): ")
+i = input("Paste database you want to use (in the same partition): ")
 bots.loadUsers(load_workbook(os.getcwd()+'/'+i))
 
 for login, password in bots.users.items():
